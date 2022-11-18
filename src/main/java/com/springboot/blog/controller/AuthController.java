@@ -2,6 +2,8 @@ package com.springboot.blog.controller;
 
 import java.util.Collections;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import com.springboot.blog.security.JwtTokenProvider;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Api(value = "Auth controller exposes sign in and sign out REST APIs")
 public class AuthController {
 	
 	@Autowired
@@ -44,6 +47,7 @@ public class AuthController {
 	private JwtTokenProvider tokenProvider;
 	
 	
+	@ApiOperation(value = "REST API to login user to blog application")
 	@PostMapping("/signin")
 	public ResponseEntity<JwtAuthResponse> authenticateUser(@RequestBody LoginDto loginDto){
 		Authentication authentication =  authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(),
@@ -56,7 +60,8 @@ public class AuthController {
 	
 		return ResponseEntity.ok(new JwtAuthResponse(token));
 	}
-	
+
+	@ApiOperation(value = "REST API to sign up user to blog application")
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@RequestBody SignupDto signupDto){
 		

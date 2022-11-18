@@ -6,6 +6,9 @@ import com.springboot.blog.payload.PostDtoV2;
 import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.service.PostService;
 import com.springboot.blog.utils.AppConstants;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +18,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+@Api(value = "CRUD Rest APIs for Post resources")
 @RestController
 @RequestMapping
 public class PostController {
@@ -25,6 +29,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @ApiOperation(value = "Create Post REST API")
     @PreAuthorize("hasRole('ADMIN')")
     // create blog post rest api
     @PostMapping("/api/v1/posts")
@@ -33,6 +38,7 @@ public class PostController {
     }
 
     // get all posts rest api
+    @ApiOperation(value = "Get All REST API")
     @GetMapping("/api/v1/posts")
     public PostResponse getAllPosts(
             @RequestParam(value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
@@ -45,6 +51,7 @@ public class PostController {
 
     // get post by id
     //Versioning thru URI path
+    @ApiOperation(value = "Get All REST API by Id")
     @GetMapping("/api/v1/posts/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable(name = "id") long id){
         return ResponseEntity.ok(postService.getPostById(id));
