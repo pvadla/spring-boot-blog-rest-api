@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping
 public class PostController {
 
-    private PostService postService;
+    private PostService postService;@Requ
 
     public PostController(PostService postService) {
         this.postService = postService;
