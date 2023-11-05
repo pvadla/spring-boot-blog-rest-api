@@ -3,11 +3,12 @@ package com.springboot.blog.controller;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.service.CommentService;
 import io.swagger.annotations.Api;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 
 @Api(value = "CRUD REST API for Comment Resource")
